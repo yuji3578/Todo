@@ -73,6 +73,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         // Realmを取得する
         todoService = new TodoService(this);
 
+        // 日時の初期値を設定する
+        setDateTime();
     }
 
     /**
@@ -91,6 +93,18 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         addBtn.setOnClickListener(this);
         datePickerBtn.setOnClickListener(this);
         timePickerBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 日時の初期値を設定する
+     */
+    protected void setDateTime(){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat sdfTime = new SimpleDateFormat("HH:mm");
+        TextView dateTextView = (TextView) findViewById(R.id.dateText);
+        dateTextView.setText(sdfDate.format(new Date()));
+        TextView timeTextView = (TextView) findViewById(R.id.timeText);
+        timeTextView.setText(sdfTime.format(new Date()));
     }
 
     /**
