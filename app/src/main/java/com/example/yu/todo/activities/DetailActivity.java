@@ -71,7 +71,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         // TodoListの一覧画面かTodoらタイトルを受け取る
         Intent intent = getIntent();
-        int id = Integer.valueOf(intent.getStringExtra( "id" ));
+        int id = intent.getIntExtra( "id" ,0);
 
         // DBからTodoを受け取る
         todo = todoService.find(id);

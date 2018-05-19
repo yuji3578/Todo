@@ -160,21 +160,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 // Todoを一件DBに挿入する
                 todoService.create(todo);
 
-                // AlertReceiverを呼び出すインテントを生成する
-                Intent eventIntent = new Intent(getApplicationContext(), AlertReceiver.class);
-
-                // Notificationの識別子をインテントに追加する
-                eventIntent.putExtra("eventId" , eventId);
-
-                // PendingIntentを取得する
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, eventIntent , PendingIntent.FLAG_CANCEL_CURRENT);
-
-                // AlarmManagerを取得する
-                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-                alarmManager.set(AlarmManager.RTC_WAKEUP,todo.getEventDate().getTime(), pendingIntent);
-
-                // Notificationの識別子をインクリメントする
-                eventId++;
+                // Alertをセットする
+                setAlert(todo);
 
                 // 一覧画面に戻る
                 Intent intent = new Intent(this, MainActivity.class);
@@ -266,5 +253,26 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         return false;
+    }
+
+    /**
+     * Alertをセットする
+     */
+    public void setAlert(Todo todo){
+        // AlertReceiverを呼び出すインテントを生成する
+        Intent eventIntent = new Intent(getApplicationContext(), AlertReceiver.class);
+
+        // Notificationの識別子をインテントに追加する
+        eventIntent.putExtra("eventId" , eventId);
+
+        // PendingIntentを取得する
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, eventIntent , PendingIntent.FLAG_CANCEL_CURRENT);
+
+        // AlarmManagerを取得する
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,todo.getEventDate().getTime(), pendingIntent);
+
+        // Notificationの識別子をインクリメントする
+        eventId++;
     }
 }

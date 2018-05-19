@@ -175,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         // 選択アイテムを取得
         List<Todo> todoList = todoService.findAll();
-        String id = String.valueOf(todoList.get(i).getId());
+        int id = todoList.get(i).getId();
 
         // Todo参照画面に遷移する
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
