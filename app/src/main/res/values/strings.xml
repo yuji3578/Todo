@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">Todoリスト</string>
     <string name="action_settings">Settings</string>
+    <string name="title">タイトル</string>
+    <string name="titleHint">タイトルを入力してください。</string>
+    <string name="content">内容</string>
+    <string name="contentHint">内容をこちらに入力してください。</string>
+    <string name="dateTime">日時</string>
+    <string name="date">日付</string>
+    <string name="datePickerBtn">日付を選択する</string>
+    <string name="time">時刻</string>
+    <string name="timePickerBtn">時刻を選択する</string>
+    <string name="addBtn">追加する</string>
+    <string name="deleteBtn">削除する</string>
 </resources>
