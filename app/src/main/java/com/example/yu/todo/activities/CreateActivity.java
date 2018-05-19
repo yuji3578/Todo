@@ -1,5 +1,8 @@
 package com.example.yu.todo.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import com.example.yu.todo.R;
 import com.example.yu.todo.flagments.CustomDatePickerDialogFragment;
 import com.example.yu.todo.flagments.CustomTimePickerDialogFragment;
 import com.example.yu.todo.models.Todo;
+import com.example.yu.todo.receivers.AlertReceiver;
 import com.example.yu.todo.services.TodoService;
 import com.example.yu.todo.utils.CustomDateFormat;
 import com.example.yu.todo.utils.CustomDateTimeFormat;
@@ -68,6 +72,11 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
      * 「時刻を選択する」ボタン
      */
     private Button timePickerBtn;
+
+    /**
+     * Notificationの識別子
+     */
+    private Integer eventId = 0;
 
     /**
      * Todoが格納されているDBと接続するTodoService
@@ -150,6 +159,22 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
                 // Todoを一件DBに挿入する
                 todoService.create(todo);
+
+                // AlertReceiverを呼び出すインテントを生成する
+                Intent eventIntent = new Intent(getApplicationContext(), AlertReceiver.class);
+
+                // Notificationの識別子をインテントに追加する
+                eventIntent.putExtra("eventId" , eventId);
+
+                // PendingIntentを取得する
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, eventIntent , PendingIntent.FLAG_CANCEL_CURRENT);
+
+                // AlarmManagerを取得する
+                AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+                alarmManager.set(AlarmManager.RTC_WAKEUP,todo.getEventDate().getTime(), pendingIntent);
+
+                // Notificationの識別子をインクリメントする
+                eventId++;
 
                 // 一覧画面に戻る
                 Intent intent = new Intent(this, MainActivity.class);
