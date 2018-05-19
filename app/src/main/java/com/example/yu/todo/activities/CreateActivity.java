@@ -149,7 +149,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 }
 
                 // Todoを一件DBに挿入する
-                todoService.create(todo.getTitle(),todo.getContent(),todo.getEventDate());
+                todoService.create(todo);
 
                 // 一覧画面に戻る
                 Intent intent = new Intent(this, MainActivity.class);

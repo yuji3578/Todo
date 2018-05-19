@@ -28,19 +28,26 @@ public class TodoService {
     /**
      * Todoを一件検索する
      */
-    public Todo find(String title){
-        return realm.where(Todo.class).equalTo("title", title).findFirst();
+    public Todo find(int id){
+        return realm.where(Todo.class).equalTo("id", id).findFirst();
     }
 
     /**
      * Todoを一件登録する
      */
-    public void create(String title,String content,Date eventDate){
+    public void create(Todo inputTodo){
         realm.beginTransaction();
-        Todo todo = realm.createObject(Todo.class);
-        todo.setTitle(title);
-        todo.setContent(content);
-        todo.setEventDate(eventDate);
+        Number currentIdNum = realm.where(Todo.class).max("id");
+        int nextId;
+        if(currentIdNum == null) {
+            nextId = 1;
+        } else {
+            nextId = currentIdNum.intValue() + 1;
+        }
+        Todo todo = realm.createObject(Todo.class,nextId);
+        todo.setTitle(inputTodo.getTitle());
+        todo.setContent(inputTodo.getContent());
+        todo.setEventDate(inputTodo.getEventDate());
         realm.commitTransaction();
     }
 

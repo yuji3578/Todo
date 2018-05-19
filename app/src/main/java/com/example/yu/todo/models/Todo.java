@@ -3,11 +3,18 @@ package com.example.yu.todo.models;
 import java.util.Date;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Todo
  */
 public class Todo extends RealmObject {
+
+    /**
+     * ID
+     */
+    @PrimaryKey
+    private Integer id;
 
     /**
      * タイトル
@@ -23,6 +30,14 @@ public class Todo extends RealmObject {
      * 開催日
      */
     private Date eventDate;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setContent(String content) {
         this.content = content;

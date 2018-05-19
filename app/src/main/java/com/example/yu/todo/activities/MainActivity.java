@@ -174,12 +174,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         // 選択アイテムを取得
-        ListView listView = (ListView)adapterView;
-        String title = (String)listView.getItemAtPosition(i);
+        List<Todo> todoList = todoService.findAll();
+        String id = String.valueOf(todoList.get(i).getId());
 
         // Todo参照画面に遷移する
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-        intent.putExtra("title", title);
+        intent.putExtra("id", id);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
