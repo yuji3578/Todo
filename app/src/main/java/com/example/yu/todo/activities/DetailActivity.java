@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.yu.todo.R;
 import com.example.yu.todo.models.Todo;
 import com.example.yu.todo.services.TodoService;
+import com.example.yu.todo.utils.CustomDateTimeFormat;
 
 import java.text.SimpleDateFormat;
 
@@ -23,6 +24,21 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
      * Todo
      */
     private Todo todo;
+
+    /**
+     * Todoのタイトル
+     */
+    private TextView titleTextView;
+
+    /**
+     * Todoの内容
+     */
+    private TextView contentTextView;
+
+    /**
+     * Todoの日時
+     */
+    private TextView dateTimeTextView;
 
     /**
      * 「削除する」ボタン
@@ -60,24 +76,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         // DBからTodoを受け取る
         todo = todoService.find(title);
 
-        // Todoのタイトルを画面に表示する
-        TextView titleTextView = (TextView) findViewById(R.id.titleText);
-        titleTextView.setText(title);
-
-        // Todoの内容を画面に表示する
-        TextView contentTextView = (TextView) findViewById(R.id.contentText);
-        contentTextView.setText(todo.getContent());
-
-        // Todoの日付を画面に表示する
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-        TextView dateTextView = findViewById(R.id.dateText);
-        dateTextView.setText(sdf.format(todo.getEventDate()));
+        // 画面の要素に値をセットする
+        setValueToItems(todo);
     }
 
     /**
      * 画面の要素を取得する
      */
     protected void findViews() {
+        titleTextView = (TextView) findViewById(R.id.titleText);
+        contentTextView = (TextView) findViewById(R.id.contentText);
+        dateTimeTextView = (TextView) findViewById(R.id.dateText);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
     }
 
@@ -86,6 +95,20 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
      */
     protected void setListeners() {
         deleteBtn.setOnClickListener(this);
+    }
+
+    /**
+     * 画面の要素に値をセットする
+     */
+    protected void setValueToItems(Todo todo){
+        // Todoのタイトルを画面に表示する
+        titleTextView.setText(todo.getTitle());
+
+        // Todoの内容を画面に表示する
+        contentTextView.setText(todo.getContent());
+
+        // Todoの日時を画面に表示する
+        dateTimeTextView.setText(CustomDateTimeFormat.convertToString(todo.getEventDate()));
     }
 
     /**
