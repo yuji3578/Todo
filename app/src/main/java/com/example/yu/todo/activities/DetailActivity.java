@@ -41,6 +41,11 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private TextView dateTimeTextView;
 
     /**
+     * Todoの通知
+     */
+    private TextView notifyCheck;
+
+    /**
      * 「削除する」ボタン
      */
     private Button deleteBtn;
@@ -88,6 +93,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         contentTextView = (TextView) findViewById(R.id.contentText);
         dateTimeTextView = (TextView) findViewById(R.id.dateText);
         deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        notifyCheck = (TextView) findViewById(R.id.notifyCheck);
     }
 
     /**
@@ -109,6 +115,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
 
         // Todoの日時を画面に表示する
         dateTimeTextView.setText(CustomDateTimeFormat.convertToString(todo.getEventDate()));
+
+        // Todoの通知について画面に表示する
+        //setNotifyCheck();
     }
 
     /**
@@ -130,6 +139,18 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
 
                 break;
+        }
+    }
+
+    /**
+     * 通知をするかどうかを表示する
+     */
+    public void setNotifyCheck(){
+
+        if(todo.getNotify()){
+            notifyCheck.setText(String.valueOf(todo.getBeforeMinutes()) + "分前に通知をする");
+        } else {
+            notifyCheck.setText("通知はしない");
         }
     }
 }

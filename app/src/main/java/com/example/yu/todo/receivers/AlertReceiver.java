@@ -34,6 +34,7 @@ public class AlertReceiver extends BroadcastReceiver {
         // 受信したインテントから情報を取得する
         int id = intent.getIntExtra("id", 0);
         String title = intent.getStringExtra("title");
+        int beforeMinutes = intent.getIntExtra("beforeMinutes", 0);
 
         // 通知チャンネルのIDにする任意の文字列
         String channelId = "updates";
@@ -58,7 +59,7 @@ public class AlertReceiver extends BroadcastReceiver {
                 = new NotificationCompat.Builder(context, channelId)
                 .setContentTitle("もうすぐイベントが始まります！")
                 .setContentText(title)
-                .setSubText("何分後に開始です。")
+                .setSubText( beforeMinutes +"分後に開始です！")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
                 .setAutoCancel(true);
 

@@ -101,6 +101,33 @@
                 android:text="@string/timePickerBtn" />
         </LinearLayout>
 
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/notifyCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorFontWhite"/>
+
+            <Spinner
+                android:id="@+id/minutes_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:entries="@array/minutes"
+                android:spinnerMode="dialog"
+                android:background="@color/colorFontWhite"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/beforeMinutes"
+                android:textColor="@color/colorFontWhite"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
         <Button
             android:id="@+id/addBtn"
             android:layout_width="100dp"

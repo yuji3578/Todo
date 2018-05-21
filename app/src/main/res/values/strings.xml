@@ -12,5 +12,6 @@
     <string name="timePickerBtn">時刻を選択する</string>
     <string name="addBtn">追加する</string>
     <string name="deleteBtn">削除する</string>
-    <string name="timeNotification">時間になりました！</string>
+    <string name="beforeMinutes">分前に通知をする</string>
+    <string name="notify">通知</string>
 </resources>

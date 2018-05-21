@@ -50,6 +50,19 @@
             android:layout_height="wrap_content"
             android:background="@drawable/flame_style" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/notify"
+            android:textColor="@color/colorFontWhite"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/notifyCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/flame_style" />
+
         <Button
             android:id="@+id/deleteBtn"
             android:layout_width="100dp"

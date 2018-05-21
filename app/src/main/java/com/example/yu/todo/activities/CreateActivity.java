@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.yu.todo.R;
@@ -21,12 +24,13 @@ import com.example.yu.todo.utils.CustomDateTimeFormat;
 import com.example.yu.todo.utils.CustomTimeFormat;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Todoの登録画面
  */
-public class CreateActivity extends AppCompatActivity implements View.OnClickListener{
+public class CreateActivity extends AppCompatActivity implements View.OnClickListener , AdapterView.OnItemSelectedListener{
 
     /**
      * タイトル
@@ -74,6 +78,21 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     private Button timePickerBtn;
 
     /**
+     * 通知をするかどうかのチェックボックス
+     */
+    private CheckBox notifyCheck;
+
+    /**
+     * 何分前に通知のスピナー
+     */
+    private Spinner minutesSpinner;
+
+    /**
+     * 選択された何分前か
+     */
+    private Integer beforeMinutes;
+
+    /**
      * Todoが格納されているDBと接続するTodoService
      */
     private TodoService todoService;
@@ -111,6 +130,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         datePickerBtn = (Button) findViewById(R.id.datePickerBtn);
         timeTextView = (TextView) findViewById(R.id.timeText);
         timePickerBtn = (Button)findViewById(R.id.timePickerBtn);
+        notifyCheck = (CheckBox) findViewById(R.id.notifyCheck);
+        minutesSpinner = (Spinner) findViewById(R.id.minutes_spinner);
     }
 
     /**
@@ -120,6 +141,8 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         addBtn.setOnClickListener(this);
         datePickerBtn.setOnClickListener(this);
         timePickerBtn.setOnClickListener(this);
+        minutesSpinner.setOnItemSelectedListener(this);
+        notifyCheck.setOnClickListener(this);
     }
 
     /**
@@ -137,6 +160,10 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
      */
     @Override
     public void onClick(View v) {
+
+        // NotifyCheckを取得する
+        boolean checked = notifyCheck.isChecked();
+
         switch (v.getId()) {
 
             // 「追加する」ボタンが押下された場合
@@ -156,7 +183,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 todoService.create(todo);
 
                 // Alertをセットする
-                setAlert(todo);
+                if(checked){
+                    setAlert(todo);
+                }
 
                 // 一覧画面に戻る
                 Intent intent = new Intent(this, MainActivity.class);
@@ -212,6 +241,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         // タイトル
         todo.setTitle(titleTextView.getText().toString());
 
+        // 内容
+        todo.setContent(contentTextView.getText().toString());
+
         // 日時
         String dateTime = dateTextView.getText().toString() + " " + timeTextView.getText().toString();
         Date eventDate = null;
@@ -222,8 +254,15 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         }
         todo.setEventDate(eventDate);
 
-        // テキストボックスからTodoの内容を取得する
-        todo.setContent(contentTextView.getText().toString());
+        // 通知をするかどうか
+        if(notifyCheck.isChecked()){
+            todo.setNotify(true);
+        } else {
+            todo.setNotify(false);
+        }
+
+        // 何分前に通知をするかどうか
+        todo.setBeforeMinutes(beforeMinutes);
 
         return todo;
     }
@@ -261,12 +300,38 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         // Notificationに必要な情報をインテントに追加する
         eventIntent.putExtra("id" , todo.getId());
         eventIntent.putExtra("title",todo.getTitle());
+        eventIntent.putExtra("beforeMinutes",todo.getBeforeMinutes());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(todo.getEventDate());
+        calendar.add(Calendar.MINUTE, -(beforeMinutes));
 
         // PendingIntentを取得する
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, eventIntent , PendingIntent.FLAG_CANCEL_CURRENT);
 
         // AlarmManagerを取得する
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP,todo.getEventDate().getTime(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    /**
+     * スピナーが選択されている場合
+     * @param adapterView
+     * @param view
+     * @param i
+     * @param l
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        beforeMinutes = Integer.valueOf((String)minutesSpinner.getSelectedItem());
+    }
+
+    /**
+     * スピナーが選択されていない場合
+     * @param adapterView
+     */
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+        beforeMinutes = 0;
     }
 }

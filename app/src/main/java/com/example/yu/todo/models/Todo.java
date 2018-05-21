@@ -31,6 +31,16 @@ public class Todo extends RealmObject {
      */
     private Date eventDate;
 
+    /**
+     * 何分前に通知の分数
+     */
+    private Integer beforeMinutes;
+
+    /**
+     * 通知
+     */
+    private Boolean notify;
+
     public Integer getId() {
         return id;
     }
@@ -61,5 +71,21 @@ public class Todo extends RealmObject {
 
     public Date getEventDate() {
         return eventDate;
+    }
+
+    public Integer getBeforeMinutes() {
+        return beforeMinutes;
+    }
+
+    public void setBeforeMinutes(Integer beforeMinutes) {
+        this.beforeMinutes = beforeMinutes;
+    }
+
+    public void setNotify(Boolean notify) {
+        this.notify = notify;
+    }
+
+    public Boolean getNotify() {
+        return notify;
     }
 }
