@@ -1,11 +1,16 @@
 package com.example.yu.todo.receivers;
 
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 import com.example.yu.todo.activities.MainActivity;
 
@@ -18,43 +23,46 @@ public class AlertReceiver extends BroadcastReceiver {
 
     /**
      * 通知を受け取った場合
+     *
      * @param context
      * @param intent
      */
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        // 受信したインテントから識別子を取得する
-        int eventId = intent.getIntExtra("eventId" , 0);
+        // 受信したインテントから情報を取得する
+        int id = intent.getIntExtra("id", 0);
+        String title = intent.getStringExtra("title");
 
-        //NotificationManagerオブジェクトを取得する
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        // 通知チャンネルのIDにする任意の文字列
+        String channelId = "updates";
+        // 通知チャンネル名
+        String name = "更新情報";
+        // デフォルトの重要度
+        int importance = NotificationManager.IMPORTANCE_HIGH;
+        NotificationChannel channel = new NotificationChannel(channelId, name, importance);
 
-        // アプリを呼び出すためのインテントを生成する
-        Intent eventIntent = new Intent(context, MainActivity.class);
+        // 通知チャンネルのデフォルト値を設定する
+        channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
+        channel.enableVibration(true);
+        channel.enableLights(true);
+        channel.setShowBadge(false);
 
-        PendingIntent intentActivity = PendingIntent.getActivity(context
-                ,0
-                ,eventIntent
-                ,PendingIntent.FLAG_CANCEL_CURRENT);
+        // NotificationManagerCompatにcreateNotificationChannel()は無い。
+        NotificationManager nm = context.getSystemService(NotificationManager.class);
+        nm.createNotificationChannel(channel);
 
-        // Notificationを生成する
-        builder = new Notification.Builder(context);
-
-        // Notificationの設定をする
-        builder.setContentTitle("時間になりました！")
-                // アイコンイメージのセット
+        // 通知チャンネルのIDを指定する
+        NotificationCompat.Builder builder
+                = new NotificationCompat.Builder(context, channelId)
+                .setContentTitle("もうすぐイベントが始まります！")
+                .setContentText(title)
+                .setSubText("何分後に開始です。")
                 .setSmallIcon(android.R.drawable.ic_dialog_info)
-                // インテント受信時のタイムスタンプを表示する
-                .setWhen(System.currentTimeMillis())
-                // Notificationの重要度を高めに設定する
-                .setPriority(Notification.PRIORITY_HIGH)
-                // Notificationに触れたときに非表示にする
-                .setAutoCancel(true)
-                // Notificationがタップされた場合はアプリを呼び出す
-                .setContentIntent(intentActivity);
+                .setAutoCancel(true);
 
-        // Notificationを表示する
-        notificationManager.notify(eventId,builder.build());
+        // 通知を実行する
+        NotificationManagerCompat.from(context).notify(id, builder.build());
     }
 }

@@ -13,8 +13,10 @@ import android.widget.TextView;
 import com.example.yu.todo.R;
 import com.example.yu.todo.flagments.CustomDatePickerDialogFragment;
 import com.example.yu.todo.flagments.CustomTimePickerDialogFragment;
+import com.example.yu.todo.models.Event;
 import com.example.yu.todo.models.Todo;
 import com.example.yu.todo.receivers.AlertReceiver;
+import com.example.yu.todo.services.EventService;
 import com.example.yu.todo.services.TodoService;
 import com.example.yu.todo.utils.CustomDateFormat;
 import com.example.yu.todo.utils.CustomDateTimeFormat;
@@ -72,11 +74,6 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
      * 「時刻を選択する」ボタン
      */
     private Button timePickerBtn;
-
-    /**
-     * Notificationの識別子
-     */
-    private Integer eventId = 0;
 
     /**
      * Todoが格納されているDBと接続するTodoService
@@ -259,11 +256,13 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
      * Alertをセットする
      */
     public void setAlert(Todo todo){
+
         // AlertReceiverを呼び出すインテントを生成する
         Intent eventIntent = new Intent(getApplicationContext(), AlertReceiver.class);
 
-        // Notificationの識別子をインテントに追加する
-        eventIntent.putExtra("eventId" , eventId);
+        // Notificationに必要な情報をインテントに追加する
+        eventIntent.putExtra("id" , todo.getId());
+        eventIntent.putExtra("title",todo.getTitle());
 
         // PendingIntentを取得する
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0, eventIntent , PendingIntent.FLAG_CANCEL_CURRENT);
@@ -271,8 +270,5 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         // AlarmManagerを取得する
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP,todo.getEventDate().getTime(), pendingIntent);
-
-        // Notificationの識別子をインクリメントする
-        eventId++;
     }
 }

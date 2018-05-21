@@ -9,6 +9,9 @@ import java.util.Date;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
+/**
+ * TodoをやりとりするRealmクラス
+ */
 public class TodoService {
 
     /**
