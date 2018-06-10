@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.yu.todo.R;
 import com.example.yu.todo.models.Todo;
 import com.example.yu.todo.services.TodoService;
@@ -48,7 +49,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 「削除する」ボタン
      */
-    private Button deleteBtn;
+    private BootstrapButton deleteBtn;
 
     /**
      * Todoが格納されているDBと接続するTodoService
@@ -92,7 +93,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         titleTextView = (TextView) findViewById(R.id.titleText);
         contentTextView = (TextView) findViewById(R.id.contentText);
         dateTimeTextView = (TextView) findViewById(R.id.dateText);
-        deleteBtn = (Button) findViewById(R.id.deleteBtn);
+        deleteBtn = (BootstrapButton) findViewById(R.id.deleteBtn);
         notifyCheck = (TextView) findViewById(R.id.notifyCheck);
     }
 

@@ -3,74 +3,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.DetailActivity"
-    android:background="@color/colorBackGround">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".activities.DetailActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <TextView
             android:id="@+id/titleText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/flame_style" />
+            android:layout_height="wrap_content" />
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/content"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <TextView
             android:id="@+id/contentText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/flame_style" />
+            android:layout_height="wrap_content" />
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/dateTime"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <TextView
             android:id="@+id/dateText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/flame_style" />
+            android:layout_height="wrap_content" />
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/notify"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <TextView
             android:id="@+id/notifyCheck"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/flame_style" />
+            android:layout_height="wrap_content"/>
 
-        <Button
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/deleteBtn"
-            android:layout_width="100dp"
+            app:bootstrapSize="lg"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorDelete"
-            android:text="@string/deleteBtn"
-            android:textColor="@color/colorFontWhite" />
+            app:bootstrapBrand="warning"
+            app:bootstrapText="@string/deleteBtn"
+            android:layout_width="100dp"
+            app:roundedCorners="true"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

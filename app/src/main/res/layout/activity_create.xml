@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackGround"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.CreateActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,46 +11,44 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/title"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <EditText
             android:id="@+id/titleText"
             style="@style/Widget.AppCompat.AutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/flame_style"
             android:hint="@string/titleHint"
             android:inputType="text" />
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/content"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <EditText
             android:id="@+id/contentText"
             style="@style/Widget.AppCompat.AutoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/flame_style"
             android:hint="@string/contentHint"
             android:inputType="textMultiLine"
             android:lines="6"
             android:singleLine="false" />
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/date"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -62,23 +60,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/flame_style"
                 android:textSize="20sp" />
 
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/datePickerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@string/datePickerBtn" />
+                android:text="@string/datePickerBtn"
+                app:bootstrapBrand="primary"
+                app:roundedCorners="true"/>
         </LinearLayout>
 
-        <TextView
+        <com.beardedhen.androidbootstrap.BootstrapLabel
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/time"
-            android:textColor="@color/colorFontWhite"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:bootstrapHeading="h5"/>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
@@ -90,15 +89,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/flame_style"
                 android:textSize="20sp" />
 
-            <Button
+            <com.beardedhen.androidbootstrap.BootstrapButton
                 android:id="@+id/timePickerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="@string/timePickerBtn" />
+                android:text="@string/timePickerBtn"
+                app:bootstrapBrand="primary"
+                app:roundedCorners="true"/>
         </LinearLayout>
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -109,33 +109,31 @@
             <CheckBox
                 android:id="@+id/notifyCheck"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@color/colorFontWhite"/>
+                android:layout_height="match_parent"/>
 
             <Spinner
                 android:id="@+id/minutes_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:entries="@array/minutes"
-                android:spinnerMode="dialog"
-                android:background="@color/colorFontWhite"/>
+                android:spinnerMode="dialog"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/beforeMinutes"
-                android:textColor="@color/colorFontWhite"
                 android:textSize="20sp"/>
         </LinearLayout>
 
-        <Button
+        <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/addBtn"
             android:layout_width="100dp"
+            app:bootstrapSize="lg"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/colorDelete"
             android:text="@string/addBtn"
-            android:textColor="@color/colorFontWhite" />
+            app:bootstrapBrand="success"
+            app:roundedCorners="true"/>
 
     </LinearLayout>
 

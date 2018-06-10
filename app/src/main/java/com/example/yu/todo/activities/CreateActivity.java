@@ -13,7 +13,9 @@ import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.example.yu.todo.R;
+import com.example.yu.todo.bootstraps.Bootstrap;
 import com.example.yu.todo.flagments.CustomDatePickerDialogFragment;
 import com.example.yu.todo.flagments.CustomTimePickerDialogFragment;
 import com.example.yu.todo.models.Todo;
@@ -45,7 +47,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 「追加する」ボタン
      */
-    private Button addBtn;
+    private BootstrapButton addBtn;
 
     /**
      * 日付
@@ -60,7 +62,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 「日付を選択する」ボタン
      */
-    private Button datePickerBtn;
+    private BootstrapButton datePickerBtn;
 
     /**
      * 時刻
@@ -75,7 +77,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * 「時刻を選択する」ボタン
      */
-    private Button timePickerBtn;
+    private BootstrapButton timePickerBtn;
 
     /**
      * 通知をするかどうかのチェックボックス
@@ -125,11 +127,11 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     protected void findViews() {
         titleTextView = (TextView) findViewById(R.id.titleText);
         contentTextView = (TextView) findViewById(R.id.contentText);
-        addBtn = (Button) findViewById(R.id.addBtn);
+        addBtn = (BootstrapButton) findViewById(R.id.addBtn);
         dateTextView = (TextView) findViewById(R.id.dateText);
-        datePickerBtn = (Button) findViewById(R.id.datePickerBtn);
+        datePickerBtn = (BootstrapButton) findViewById(R.id.datePickerBtn);
         timeTextView = (TextView) findViewById(R.id.timeText);
-        timePickerBtn = (Button)findViewById(R.id.timePickerBtn);
+        timePickerBtn = (BootstrapButton) findViewById(R.id.timePickerBtn);
         notifyCheck = (CheckBox) findViewById(R.id.notifyCheck);
         minutesSpinner = (Spinner) findViewById(R.id.minutes_spinner);
     }
