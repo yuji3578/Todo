@@ -39,7 +39,7 @@ public class Todo extends RealmObject {
     /**
      * 通知
      */
-    private Boolean notify;
+    private int notify;
 
     public Integer getId() {
         return id;
@@ -81,11 +81,11 @@ public class Todo extends RealmObject {
         this.beforeMinutes = beforeMinutes;
     }
 
-    public void setNotify(Boolean notify) {
+    public void setNotify(int notify) {
         this.notify = notify;
     }
 
-    public Boolean getNotify() {
+    public int getNotify() {
         return notify;
     }
 }

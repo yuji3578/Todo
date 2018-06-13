@@ -258,9 +258,9 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
 
         // 通知をするかどうか
         if(notifyCheck.isChecked()){
-            todo.setNotify(true);
+            todo.setNotify(1);
         } else {
-            todo.setNotify(false);
+            todo.setNotify(1);
         }
 
         // 何分前に通知をするかどうか
