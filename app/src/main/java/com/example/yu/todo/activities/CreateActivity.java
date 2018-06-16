@@ -85,6 +85,11 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
     private CheckBox notifyCheck;
 
     /**
+     * チェックボックスによる値
+     */
+    private int checkBox;
+
+    /**
      * 何分前に通知のスピナー
      */
     private Spinner minutesSpinner;
@@ -213,6 +218,16 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
                 ctpdf.show(getFragmentManager(), "sampleTime");
 
                 break;
+
+            // チェックボックスが押下された場合
+            case R.id.notifyCheck:
+                if(notifyCheck.isChecked()){
+                    checkBox = 1;
+                } else {
+                    checkBox = 0;
+                }
+
+                break;
         }
     }
 
@@ -257,11 +272,7 @@ public class CreateActivity extends AppCompatActivity implements View.OnClickLis
         todo.setEventDate(eventDate);
 
         // 通知をするかどうか
-        if(notifyCheck.isChecked()){
-            todo.setNotify(1);
-        } else {
-            todo.setNotify(1);
-        }
+        todo.setNotify(checkBox);
 
         // 何分前に通知をするかどうか
         todo.setBeforeMinutes(beforeMinutes);

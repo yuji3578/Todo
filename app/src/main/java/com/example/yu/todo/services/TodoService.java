@@ -51,6 +51,8 @@ public class TodoService {
         todo.setTitle(inputTodo.getTitle());
         todo.setContent(inputTodo.getContent());
         todo.setEventDate(inputTodo.getEventDate());
+        todo.setBeforeMinutes(inputTodo.getBeforeMinutes());
+        todo.setNotify(inputTodo.getNotify());
         realm.commitTransaction();
     }
 
