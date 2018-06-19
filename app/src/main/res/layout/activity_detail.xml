@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.DetailActivity">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/title"
             android:textSize="20sp"
-            app:bootstrapHeading="h5"/>
+            app:bootstrapHeading="h5" />
 
         <TextView
             android:id="@+id/titleText"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="@string/content"
             android:textSize="20sp"
-            app:bootstrapHeading="h5"/>
+            app:bootstrapHeading="h5" />
 
         <TextView
             android:id="@+id/contentText"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:text="@string/dateTime"
             android:textSize="20sp"
-            app:bootstrapHeading="h5"/>
+            app:bootstrapHeading="h5" />
 
         <TextView
             android:id="@+id/dateText"
@@ -52,22 +52,39 @@
             android:layout_height="wrap_content"
             android:text="@string/notify"
             android:textSize="20sp"
-            app:bootstrapHeading="h5"/>
+            app:bootstrapHeading="h5" />
 
         <TextView
             android:id="@+id/notifyCheck"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
-        <com.beardedhen.androidbootstrap.BootstrapButton
-            android:id="@+id/deleteBtn"
-            app:bootstrapSize="lg"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:bootstrapBrand="warning"
-            app:bootstrapText="@string/deleteBtn"
-            android:layout_width="100dp"
-            app:roundedCorners="true"/>
+            android:orientation="horizontal">
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/editBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:bootstrapBrand="primary"
+                app:bootstrapSize="lg"
+                app:bootstrapText="@string/editBtn"
+                app:roundedCorners="true" />
+
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:id="@+id/deleteBtn"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:bootstrapBrand="warning"
+                app:bootstrapSize="lg"
+                app:bootstrapText="@string/deleteBtn"
+                app:roundedCorners="true" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

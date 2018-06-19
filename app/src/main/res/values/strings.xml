@@ -14,4 +14,6 @@
     <string name="deleteBtn">削除</string>
     <string name="beforeMinutes">分前に通知をする</string>
     <string name="notify">通知</string>
+    <string name="updateBtn">更新</string>
+    <string name="editBtn">編集</string>
 </resources>

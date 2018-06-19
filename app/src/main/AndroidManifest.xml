@@ -3,12 +3,12 @@
     package="com.example.yu.todo">
 
     <application
+        android:name=".bootstraps.Bootstrap"
         android:allowBackup="true"
         android:icon="@mipmap/todo1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/todo1"
         android:supportsRtl="true"
-        android:name=".bootstraps.Bootstrap"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
@@ -22,7 +22,10 @@
         </activity>
         <activity android:name=".activities.DetailActivity" />
         <activity android:name=".activities.CreateActivity" />
-        <receiver android:name=".receivers.AlertReceiver"/>
+
+        <receiver android:name=".receivers.AlertReceiver" />
+
+        <activity android:name=".activities.EditActivity"></activity>
     </application>
 
 </manifest>

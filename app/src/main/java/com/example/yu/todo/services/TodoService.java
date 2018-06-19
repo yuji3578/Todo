@@ -57,6 +57,15 @@ public class TodoService {
     }
 
     /**
+     * Todoを一件更新する
+     */
+    public void update(Todo inputTodo){
+        realm.beginTransaction();
+        realm.insertOrUpdate(inputTodo);
+        realm.commitTransaction();
+    }
+
+    /**
      * Todoを一件削除する
      */
     public void delete(final Todo todoModel){

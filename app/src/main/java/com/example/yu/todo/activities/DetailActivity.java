@@ -52,13 +52,17 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     private BootstrapButton deleteBtn;
 
     /**
+     * 編集ボタン
+     */
+    private BootstrapButton editBtn;
+
+    /**
      * Todoが格納されているDBと接続するTodoService
      */
     private TodoService todoService;
 
     /**
-     * 画面が初期表示された際の処理
-     *
+     * 初期処理
      * @param savedInstanceState
      */
     @Override
@@ -94,6 +98,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         contentTextView = (TextView) findViewById(R.id.contentText);
         dateTimeTextView = (TextView) findViewById(R.id.dateText);
         deleteBtn = (BootstrapButton) findViewById(R.id.deleteBtn);
+        editBtn = (BootstrapButton) findViewById(R.id.editBtn);
         notifyCheck = (TextView) findViewById(R.id.notifyCheck);
     }
 
@@ -102,6 +107,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
      */
     protected void setListeners() {
         deleteBtn.setOnClickListener(this);
+        editBtn.setOnClickListener(this);
     }
 
     /**
@@ -140,6 +146,14 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(intent);
 
                 break;
+
+            // 編集ボタンが押下された場合
+            case R.id.editBtn:
+                // Todo編集画面に遷移する
+                Intent edit = new Intent(this, EditActivity.class);
+                edit.putExtra("id", todo.getId());
+                edit.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(edit);
         }
     }
 

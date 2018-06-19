@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TodoService todoService;
 
     /**
-     * 画面が初期表示された際の処理
+     * 初期処理
      * @param savedInstanceState
      */
     @Override
